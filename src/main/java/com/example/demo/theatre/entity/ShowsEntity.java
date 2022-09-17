@@ -5,11 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,9 +17,19 @@ public class ShowsEntity {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long showid;
-   private Long theatreid;
-   private Long screenid;
-   private Long movieid;
+
+   @ManyToOne
+   @JoinColumn(name="theatreid", nullable = false)
+   private TheatreEntity theaterentity;
+
+   @ManyToOne
+   @JoinColumn(name="screenid", nullable = false)
+   private ScreenEntity screenentity;
+
+   @ManyToOne
+   @JoinColumn(name="movieid", nullable = false)
+   private MovieEntity movieentity;
+
    private String showtimings;
    private String showdate;
 }

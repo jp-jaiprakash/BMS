@@ -34,25 +34,20 @@ public class TheatreService {
    ScreenRepository screenRepository;
 
 
-   public List<Theatre> getTheatres(String city, String movieName, String date) {
+   public List<TheatreEntity> getTheatres(String city, String movieName, String date) {
+
 
       MovieEntity movieEntity = movieRepository.findByName(movieName);
       List<TheatreEntity> theatreEntity = theatreRepository.findByCity(city);
-      List<Long> theatreIds= theatreEntity.stream().map(TheatreEntity::getTheatreid).collect(Collectors.toList());
-      List<ShowsEntity> showsEntity = showsRepository.findByMovieIdAndTheatreId(movieEntity.getMovieid(), date, theatreIds);
-      List<Long> screenIds = showsEntity.stream().map(ShowsEntity::getScreenid).collect(Collectors.toList());
-      List<ScreenEntity> screenList = screenRepository.findByScreenId(screenIds);
-      List<Theatre> theatres = new ArrayList<>();
-      showsEntity.stream().forEach(t -> {
-         Movie movie = new Movie(movieName, date, t.getShowtimings());
-         ScreenEntity screenEntity =
-                 screenList.stream().filter(s -> s.getScreenid().equals(t.getScreenid())).findFirst().get();
-         Screen screen = new Screen(screenEntity.getScreenum(), screenEntity.getCapacity(), movie);
-         TheatreEntity theatreEntity1 =
-                 theatreEntity.stream().filter(s -> s.getTheatreid().equals(t.getTheatreid())).findFirst().get();
-        // Theatre theatre =  new Theatre(theatreEntity1.getTheatrename(), city, theatreEntity1.getArea(), screen);
-      });
+      List<ShowsEntity> showsEntity = showsRepository.findByMovieentityAndTheaterentityIn(movieEntity, theatreEntity);
 
-      return new ArrayList<>();
+      List<TheatreEntity> lst = new ArrayList<>();
+              showsEntity.stream().forEach(
+              t-> {
+                 lst.add(t.getScreenentity().getTheaterentity());
+              }
+      );
+
+      return lst;
    }
 }

@@ -5,11 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +18,13 @@ public class ScreenEntity {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long screenid;
-   private int screenum;
+   private int screennum;
    private int capacity;
+
+   @ManyToOne
+   @JoinColumn(name="theatreid", nullable = false)
+   private TheatreEntity theaterentity;
+
+//   @OneToMany(mappedBy = "screenentity")
+//   private List<ShowsEntity> shows;
 }

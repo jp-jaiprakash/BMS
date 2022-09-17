@@ -1,5 +1,6 @@
 package com.example.demo.theatre.model;
 
+import com.example.demo.theatre.entity.TheatreEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,5 +13,5 @@ import java.util.List;
 @Getter
 @Setter
 public class TheatreResponse {
-   private List<Theatre> theatres;
+   private List<TheatreEntity> theatres;
 }
