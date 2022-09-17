@@ -1,9 +1,7 @@
 package com.example.demo.theatre.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.demo.theatre.entity.ScreenEntity;
+import lombok.*;
 
 import java.util.List;
 
@@ -11,9 +9,11 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Theatre {
+   private Long theaterId;
    private String name;
    private String city;
    private String area;
-   private List<Screen> screens;
+   private List<ScreenEntity> screens;
 }

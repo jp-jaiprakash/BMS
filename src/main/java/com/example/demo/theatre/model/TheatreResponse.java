@@ -13,5 +13,5 @@ import java.util.List;
 @Getter
 @Setter
 public class TheatreResponse {
-   private List<TheatreEntity> theatres;
+   private List<Theatre> theatres;
 }
